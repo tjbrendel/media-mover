@@ -1,13 +1,18 @@
 import os
 
-# Get list of HEIF and HEIC files in directory
-directory = '/mnt/user/Documents/test1'
-files = [f for f in os.listdir(directory)]
+# Establish initial variables
+movie_directory = '/mnt/user/Media/Movies'
+tv_directory = '/mnt/user/Media/TV Shows'
+movie_files = [f for f in os.walk(movie_directory)]
+tv_files = [f for f in os.walk(tv_directory)]
 
 # Convert each file to JPEG
-for filename in files:
-    print(f'Moving {filename}...', end='\r')
-    os.rename(f'/mnt/user/Documents/test1/{filename}', f'/mnt/user/Documents/test2/{filename}')
-    print(f'Moving {filename}... Moving Complete!')
+for filename in movie_files:
+    print(f'{filename}')
+    #os.rename(f'/mnt/user/Documents/test1/{filename}', f'/mnt/user/Documents/test2/{filename}')
+    #print(f'Moving {filename}... Moving Complete!')
 
-print('All files moved!')
+print('')
+
+for filename in tv_files:
+    print(f'{filename}')
