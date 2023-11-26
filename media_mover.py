@@ -10,12 +10,18 @@ movie_files = [f.name for f in os.scandir(movie_directory)]
 tv_files = [f.name for f in os.scandir(tv_directory)]
 encoded_files = [f for f in os.listdir(handbrake_directory) if os.path.isfile(os.path.join(handbrake_directory, f))]
 
+movie_files_match = [f.lower().replace(' ', '') for f in movie_files]
+tv_files_match = [f.lower().replace(' ', '') for f in tv_files]
+
+for x in movie_files_match: print(x)
+for x in tv_files_match: print(x)
+
 if len(encoded_files) > 0:
     #loop through all encoded files in the handbrake directory
     for file in encoded_files:
-
+        file_match = file.lower().replace(' ', '').replace('.mkv', '')
         #check to see if current file is a movie or tv show - all tv shows will have a -sXXeXX format
-        if re.search(r'-s\d{2}e\d{2}', file):
+        if re.search(r'-s\d{2}e\d{2}', file_match):
             #TV File
             new_tv_dir = f"{tv_directory}\{file.split('-')[0]}"
             new_tv_season = file.replace('.mkv', '').split('-')[1].split('e')[0].split('s')[1]
@@ -23,7 +29,7 @@ if len(encoded_files) > 0:
             src_tv = f"{handbrake_directory}\{file}"
             
             #check to see if current tv show exists in tv shows directory
-            if file.split('-')[0] in tv_files:
+            if file_match.split('-')[0] in tv_files_match:
                 #TV Show already exists in directory
                 tv_seasons = [f.name for f in os.scandir(f"{tv_directory}\{file.split('-')[0]}")]
                 
@@ -44,7 +50,7 @@ if len(encoded_files) > 0:
             new_movie_dir = f"{movie_directory}\{file.split('.')[0]}"
             src_movie_file = f"{handbrake_directory}\{file}"
 
-            if file.replace('.mkv', '') in movie_files:
+            if file_match in movie_files_match:
                 os.replace(src_movie_file, f"{new_movie_dir}\{file}")
             else:
                 os.mkdir(new_movie_dir)
