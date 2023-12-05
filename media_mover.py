@@ -1,10 +1,15 @@
 import os
 import re
+import json
+
+#read in json config file
+with open("json_config/config.json") as config_file:
+    config_dirs = json.load(config_file)
 
 # Establish initial variables
-movie_directory = r'S:\test_dir\Movies' #'/mnt/user/Media/Movies'
-tv_directory = r'S:\test_dir\TV Shows' #'/mnt/user/Media/TV Shows'
-handbrake_directory = r'S:\test_dir\encoded'
+movie_directory = config_dirs['movie_dir_test']
+tv_directory = config_dirs['tv_dir_test']
+handbrake_directory = config_dirs['handbrake_dir']
 
 movie_files = [f.name for f in os.scandir(movie_directory)]
 tv_files = [f.name for f in os.scandir(tv_directory)]
