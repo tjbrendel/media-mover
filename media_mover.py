@@ -8,8 +8,8 @@ with open("json_config/config.json") as config_file:
     config_dirs = json.load(config_file)
 
 # Establish initial variables
-movie_directory = config_dirs['movie_dir_test']
-tv_directory = config_dirs['tv_dir_test']
+movie_directory = config_dirs['movie_dir']
+tv_directory = config_dirs['tv_dir']
 handbrake_directory = config_dirs['handbrake_dir']
 encoded_files = [f for f in os.listdir(handbrake_directory) if os.path.isfile(os.path.join(handbrake_directory, f))]
 
