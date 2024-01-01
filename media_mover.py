@@ -2,7 +2,6 @@ import os
 import re
 import json
 import time
-from modules import logger
 
 #read in json config file
 with open("json_config/config.json") as config_file:
